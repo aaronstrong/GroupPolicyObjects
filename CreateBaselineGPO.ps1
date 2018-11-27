@@ -116,6 +116,15 @@ if($CitrixUPM -eq 'Y')
     Set-GPRegistryValue -Name $gpoName -Key "HKLM\Software\Policies\Citrix\UserProfileManager\SyncExclusionListDir\List" -ValueName 3 -Value "AppData\Local\Google\Chrome\User Data\Default\Media Cache" -Type String
     Set-GPRegistryValue -Name $gpoName -Key "HKLM\Software\Policies\Citrix\UserProfileManager\SyncExclusionListDir\List" -ValueName 4 -Value "AppData\Local\Google\Software Reporter Tool" -Type String
 
+    # Directories to Sync
+    Set-GPRegistryValue -Name $gpoName -Key "HKLM\Software\Policies\Citrix\UserProfileManager\SyncDirList" -ValueName Enabled -Value 1 -Type DWord
+    #  List of Directories to Sync:
+    Set-GPRegistryValue -Name $gpoName -Key "HKLM\Software\Policies\Citrix\UserProfileManager\SyncDirList\List" -ValueName 1 -Value "AppData\Local\Microsoft\Windows\Caches" -Type String
+    Set-GPRegistryValue -Name $gpoName -Key "HKLM\Software\Policies\Citrix\UserProfileManager\SyncDirList\List" -ValueName 2 -Value "AppData\Local\Microsoft\Credentials" -Type String
+    Set-GPRegistryValue -Name $gpoName -Key "HKLM\Software\Policies\Citrix\UserProfileManager\SyncDirList\List" -ValueName 3 -Value "Appdata\Roaming\Microsoft\Credentials" -Type String
+    Set-GPRegistryValue -Name $gpoName -Key "HKLM\Software\Policies\Citrix\UserProfileManager\SyncDirList\List" -ValueName 4 -Value "Appdata\Roaming\Microsoft\Crypto" -Type String
+    Set-GPRegistryValue -Name $gpoName -Key "HKLM\Software\Policies\Citrix\UserProfileManager\SyncDirList\List" -ValueName 5 -Value "Appdata\Roaming\Microsoft\Protect" -Type String
+    Set-GPRegistryValue -Name $gpoName -Key "HKLM\Software\Policies\Citrix\UserProfileManager\SyncDirList\List" -ValueName 6 -Value "Appdata\Roaming\Microsoft\SystemCertificates" -Type String    
 }
 
 # --- Citrix XenApp Specific --- #
