@@ -16,6 +16,7 @@ new-gpo -Name $gpoName
 #    Computer Policies     #
 #--------------------------#
 
+# --- RDS Settings --- #
 # Loopback Policy
 # value 2 = Replace Mode, value 1 = Merge
 Set-GPRegistryValue -Name $gpoName -key "HKLM\Software\Policies\Microsoft\Windows\System" -ValueName UserPolicyMode -Type DWORD -Value 2
@@ -34,6 +35,8 @@ Set-GPRegistryValue -Name $gpoName -key "HKLM\Software\Policies\Microsoft\Window
 #  Value 3600000 = 60 Minutes
 Set-GPRegistryValue -Name $gpoName -Key "HKLM\Software\Policies\Microsoft\Windows NT\Terminal Services" -ValueName MaxIdleTime -Value 1800000 -Type DWord
 
+# --- Timeouts for IDLE and Disconnected Sessions --- #
+
 #  Time limit for disconnected sessions
 #  Value 0 = Never
 #  Value 300000 = 5 Minutes
@@ -47,6 +50,8 @@ Set-GPRegistryValue -Name $gpoName -key "HKLM\Software\Policies\Microsoft\Window
 Set-GPRegistryValue -Name $gpoName -Key "HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate" -ValueName DeferFeatureUpdates -Value 1 -Type DWord # 0 disable, 1 enable
 Set-GPRegistryValue -Name $gpoName -Key "HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate" -ValueName BranchReadinessLevel -Value 16 -Type DWord
 Set-GPRegistryValue -Name $gpoName -Key "HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate" -ValueName DeferFeatureUpdatesPeriodInDays -Value 365 -Type DWord
+
+# --- Redirect Logs --- #
 
 # Redirect Logs
 #  Event Log
@@ -85,7 +90,7 @@ Set-GPRegistryValue -Name $gpoName -Key "HKLM\Software\Policies\Microsoft\Window
 # Always wait for Network
 Set-GPRegistryValue -Name $gpoName -Key "HKLM\Software\Policies\Microsoft\Windows NT\CurrentVersion\Winlogon" -ValueName SyncForeGroundPolicy -Value 0 -Type DWord
 
-
+# --- Citrix UPM --- #
 if($CitrixUPM -eq 'Y')
 {
     # Enable Profile Management
@@ -113,6 +118,7 @@ if($CitrixUPM -eq 'Y')
 
 }
 
+# --- Citrix XenApp Specific --- #
 if($CitrixXenApp -eq 'Y')
 {
     # Allow asynchronous user Group Policy processing when logging on through RDS
