@@ -7,6 +7,7 @@ $gpoName = "Base Users"
 $rdsLicenseServer = "rdslicense.domain.local"
 $LogPath = "D:\EventsLogs"
 $upmUserStore = "\\SMBShare\sharename\#SAMAccountName#\!CTX_OSNAME!!CTX_PROFILEVER!"
+$o365licPath = "%localappdata%\Microsoft\Office\16.0\Licensing"  # default path
 $CitrixXenApp = 'Y' # Change to N if not required
 $CitrixUPM = 'Y' # Change to N if not required
 
@@ -92,6 +93,15 @@ Set-GPRegistryValue -Name $gpoName -Key "HKLM\Software\Policies\Microsoft\Window
 
 # Always wait for Network
 Set-GPRegistryValue -Name $gpoName -Key "HKLM\Software\Policies\Microsoft\Windows NT\CurrentVersion\Winlogon" -ValueName SyncForeGroundPolicy -Value 0 -Type DWord
+
+# === MICROSOFT OFFICE 2016, 2019, Office 365 === #
+
+# Roam the licensing token for O365
+# This setting allows you to speficy the file folder to save the licensing toekn used by shared computer activation
+# Computer | Administrative Templates | Microsoft Office 2016 | Licensing Settings
+Set-GPRegistryValue -Name $gpoName -Key "HKLM\software\policies\microsoft\office\16.0\common\licensing" -ValueName	sclcacheoverride - Value 1 String
+Set-GPRegistryValue -Name $gpoName -Key "HKLM\software\policies\microsoft\office\16.0\common\licensing" -ValueName	sclcacheoverridedirectory - Value $o365licPath String
+
 
 # === CITRIX USER PROFILE MANAGEMENT === #
 if($CitrixUPM -eq 'Y')
