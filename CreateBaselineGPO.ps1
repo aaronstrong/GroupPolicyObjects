@@ -22,6 +22,7 @@ new-gpo -Name $gpoName
 
 # Loopback Policy
 # value 2 = Replace Mode, value 1 = Merge
+# Computers | Administrative Templates | Sytem | Group Policy | Loopback Policy
 Set-GPRegistryValue -Name $gpoName -key "HKLM\Software\Policies\Microsoft\Windows\System" -ValueName UserPolicyMode -Type DWORD -Value 2
 
 # RDS Licenses
